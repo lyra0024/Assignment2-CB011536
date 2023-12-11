@@ -236,7 +236,7 @@ function book(event){
        Troom.trim() == 0
       ) 
       {
-        alert(["Kindly ensure all required fields are completed for a successful submission!"]);
+        alert(["Kindly ensure that all required fields are completed for a successful submission!"]);
       } 
   else {
     alert([
@@ -306,7 +306,7 @@ function AdBook(event) {
       foreignKids == 0 &&
       localAdults == 0 &&
       localKids == 0) {
-        alert(["Kindly ensure all required fields are completed for a successful submission!"]);
+        alert(["Kindly ensure that all required fields are completed for a successful submission!"]);
     } 
     else {
       alert([
