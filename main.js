@@ -244,7 +244,7 @@ function book(event){
         Booking Details:
            - Branch: ${branchSelect.value}
            - No. of Single Rooms: ${sRoom.value}
-           - No. of Duluxe Rooms: ${dRoom.value}
+           - No. of Deluxe Rooms: ${dRoom.value}
            - No. of Triple Rooms: ${tRoom.value}
            - No. of Extra Beds: ${bed.value}
           We look forward to welcome you to Santani. Safe travels!`
