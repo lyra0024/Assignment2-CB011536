@@ -247,7 +247,7 @@ function book(event){
            - No. of Duluxe Rooms: ${dRoom.value}
            - No. of Triple Rooms: ${tRoom.value}
            - No. of Extra Beds: ${bed.value}
-          We look forward to welcoming you to Santani. Safe travels!`
+          We look forward to welcome you to Santani. Safe travels!`
     ]);
     // Overall Booking
      Rtotal.innerText = rTotal.textContent;
