@@ -267,6 +267,15 @@ function book(event){
         alert(["Kindly ensure all required fields are completed for a successful submission!"]);
       } 
       else { 
+        alert([
+          `Thank you for booking your stay with Santani!\n
+           Booking Details:
+            - No. of Single Rooms: ${sRoom.value}
+            - No. of Duluxe Rooms: ${dRoom.value}
+            - No. of Triple Rooms: ${tRoom.value}
+            - No. of Extra Beds: ${bed.value}
+           We look forward to welcoming you to Santani. Safe travels!`
+        ]);
         clear();
         roomTotal = (sRoomv * 25000 + dRoomv * 35000 + tRoomv * 40000 + bedV * 8000 + childMealv * 5000) * totalDays;
         Rtotal.innerText = `LKR ${roomTotal.toFixed(2)}`;
