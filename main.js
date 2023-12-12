@@ -3,6 +3,8 @@ const firstName = document.getElementById("fName");
 const lastName = document.getElementById("lName");
 const Name = document.getElementById("fullName");
 const adName = document.getElementById("Name");
+// form
+const theForm = document.getElementById("theForm");
 // Personal details
 const column2Cells = document.querySelectorAll('.column2Cell');
 const column2Inputs = document.querySelectorAll('.column2Input');
@@ -277,6 +279,7 @@ function book(event){
            We look forward to welcoming you to Santani. Safe travels!`
         ]);
         clear();
+        theForm.reset();
         roomTotal = (sRoomv * 25000 + dRoomv * 35000 + tRoomv * 40000 + bedV * 8000 + childMealv * 5000) * totalDays;
         Rtotal.innerText = `LKR ${roomTotal.toFixed(2)}`;
         
@@ -338,6 +341,7 @@ function AdBook(event) {
         - Guide Requirement: ${instructor.value}\n
         Your adventure awaits!`
       ]);
+      theForm.reset();
       clear();
       erase();
   }
