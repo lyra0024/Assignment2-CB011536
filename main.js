@@ -207,6 +207,15 @@ function clear(){
   column2Cells.forEach(element => {
     element.textContent = '';});
 }
+function promoCode(){
+  if(Promo.value == "Promo123"){
+    promoValue = "Valid Promo Code";
+  } 
+  else {
+    promoValue = "Invalid Promo Code";
+  };
+  return promoValue;
+}
 // Book Now Button
 function book(event){
   event.preventDefault();
@@ -220,9 +229,28 @@ function book(event){
   const e_mail = email.value;
   const telNum = CNumber.value;
   const Ad =  numAdult.value;
-  const Child = numKids.value;
   const arrival = checkIn.value;
   const dep = checkOut.value;
+  let checkInDate = new Date(checkIn.value);
+  let checkOutDate = new Date(checkOut.value);
+  let totalDays =  (checkOutDate.getTime() - checkInDate.getTime())/(24 * 60 * 60 * 1000);
+  let sRoomv = parseInt(sRoom.value) || 0;
+  let dRoomv = parseInt(dRoom.value) || 0;
+  let tRoomv = parseInt(tRoom.value) || 0;
+  let bedV = parseInt(bed.value) || 0;
+  let childMealv = parseInt(numKids.value) || 0;
+  let roomTotal = 0;
+  let localAdultv = parseInt(lAdult.value) || 0;
+  let localKidv = parseInt(lChild.value) || 0;
+  let foreignAdutlv = parseInt(fAdult.value) || 0;
+  let foreignkidv = parseInt(fChild.value) || 0;
+  let hoursv = parseInt(hours) || 1;
+  let instructorV = instructor.value || "Guide Required";
+  let promoV = promoCode();
+  let adventureTotal = 0;
+  let discountValue = 0;
+  let overallTotal = 0;
+  let insCost = 0;
   if ( BrSelect.trim() == "" ||
        FName.trim() == "" ||
        lName.trim() == "" ||
@@ -234,52 +262,35 @@ function book(event){
        Sroom.trim() == 0 && 
        Droom.trim() == 0 && 
        Troom.trim() == 0
-      ) 
+      )
       {
-        alert(["Kindly ensure that all required fields are completed for a successful submission!"]);
+        alert(["Kindly ensure all required fields are completed for a successful submission!"]);
       } 
-  else {
-    alert([
-      `Thank you for booking your stay with Santani!\n
-        Booking Details:
-           - Branch: ${branchSelect.value}
-           - No. of Single Rooms: ${sRoom.value}
-           - No. of Deluxe Rooms: ${dRoom.value}
-           - No. of Triple Rooms: ${tRoom.value}
-           - No. of Extra Beds: ${bed.value}
-          We look forward to welcome you to Santani. Safe travels!`
-    ]);
-    // Overall Booking
-     Rtotal.innerText = rTotal.textContent;
-    if (parseFloat(Rtotal.textContent) === 0) {
-      Rtotal.innerText = 0.00.toFixed(2);
-    } 
-    else {
-       Rtotal.innerText =rTotal.textContent;
-    }
-    
-    if (parseFloat(aTotal.textContent) === 0) {
-      Atotal.innerText = 0.00.toFixed(2);
-    } 
-    else {
-      Atotal.innerText = aTotal.textContent;
-    }
-    oTotal.innerText = (parseInt(rTotal.textContent) + parseInt(aTotal.textContent)).toFixed(2);
-    if(Promo.value == "Promo123"){
-      PromoCode.innerText = "Valid Promo Code";
-      let promocode
-      promocode = oTotal.innerText - (rTotal.innerText * 0.05);
-      oTotal.innerText = 'LKR ' + promocode.toFixed(2);
+      else { 
+        clear();
+        roomTotal = (sRoomv * 25000 + dRoomv * 35000 + tRoomv * 40000 + bedV * 8000 + childMealv * 5000) * totalDays;
+        Rtotal.innerText = `LKR ${roomTotal.toFixed(2)}`;
         
-    } 
-    else {
-       PromoCode.innerText = "Invalid Promo Code";
-    }
-    clear();
-    if (isNaN(parseFloat(oTotal.innerText))){
-      oTotal.innerText = 'LKR 0.00';
-    }
-  }
+
+        if(instructorV === "Guide Required"){
+          insCost = (localKidv + foreignkidv) * 500 + (localAdultv + foreignAdutlv) * 1000;
+        } 
+        else {
+          insCost = 0;
+        }
+        adventureTotal =  ((foreignAdutlv * 10000) + (foreignkidv * 5000) + (localAdultv * 5000) + (localKidv * 2000) + insCost) * hoursv;
+        Atotal.innerText = `LKR ${adventureTotal.toFixed(2)}`;
+        
+        if (promoV.trim() == "Valid Promo Code") {
+          discountValue = parseInt(roomTotal) * 0.05; 
+        } 
+        else {
+          discountValue = 0;
+        }
+        PromoCode.innerText = promoCode();
+        overallTotal = roomTotal - discountValue;
+        oTotal.innerText = `LKR ${overallTotal.toFixed(2)}`;
+      }
 }
 bookBtn.addEventListener('click', book);
 
